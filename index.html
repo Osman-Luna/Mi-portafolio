@@ -5,7 +5,7 @@
     <title>Portafolio de Osman Natanael Quintanar Luna</title>
     <link rel="stylesheet" href="style.css">
     <style>
-        /* CSS integrado */
+        /* CSS INTEGRADO ORIGINAL */
         body {
             background-color: #f5f5f5;
             color: #333;
@@ -14,6 +14,7 @@
             padding: 0;
             line-height: 1.6;
             transition: background-color 0.3s, color 0.3s;
+            overflow-x: hidden; /* Evita scroll horizontal por la animación */
         }
 
         header {
@@ -21,6 +22,7 @@
             color: #f5f5f5;
             text-align: center;
             padding: 40px 20px;
+            position: relative;
         }
 
         header h1 {
@@ -102,26 +104,6 @@
             font-size: 0.9em;
         }
 
-        footer p {
-            margin: 5px 0;
-        }
-
-        /* Modo oscuro */
-        body.dark-mode {
-            background-color: #1c1c1c;
-            color: #e0e0e0;
-        }
-
-        body.dark-mode header {
-            background-color: #111;
-            color: #e0e0e0;
-        }
-
-        body.dark-mode footer {
-            background-color: #111;
-            color: #e0e0e0;
-        }
-
         .toggle-btn {
             background: #444;
             color: #fff;
@@ -130,6 +112,131 @@
             border-radius: 5px;
             cursor: pointer;
             margin-top: 15px;
+            position: relative;
+            z-index: 10;
+        }
+
+        /* MODO OSCURO */
+        body.dark-mode {
+            background-color: #1c1c1c;
+            color: #e0e0e0;
+        }
+        body.dark-mode header, body.dark-mode footer {
+            background-color: #111;
+        }
+
+        /* --- NUEVOS ESTILOS PARA EL ASTRONAUTA --- */
+        .skate-container {
+            width: 100%;
+            height: 120px;
+            position: relative;
+            margin-top: 20px;
+            overflow: hidden;
+        }
+
+        .astronaut {
+            position: absolute;
+            width: 50px;
+            height: 70px;
+            left: -100px;
+            bottom: 10px;
+            animation: skate-move 12s linear infinite;
+        }
+
+        /* Cuerpo del astronauta */
+        .astro-body {
+            width: 30px;
+            height: 40px;
+            background: #eee;
+            border: 2px solid #333;
+            border-radius: 10px;
+            position: absolute;
+            top: 25px;
+            left: 10px;
+        }
+
+        /* Casco */
+        .astro-head {
+            width: 28px;
+            height: 26px;
+            background: #fff;
+            border: 2px solid #333;
+            border-radius: 50%;
+            position: absolute;
+            top: 2px;
+            left: 11px;
+        }
+
+        /* Visor del casco */
+        .astro-head::after {
+            content: "";
+            position: absolute;
+            width: 18px;
+            height: 10px;
+            background: #333;
+            border-radius: 5px;
+            top: 6px;
+            left: 5px;
+        }
+
+        /* Mochila */
+        .astro-pack {
+            width: 12px;
+            height: 30px;
+            background: #ccc;
+            border: 2px solid #333;
+            position: absolute;
+            top: 30px;
+            left: 2px;
+            border-radius: 3px;
+        }
+
+        /* La Patineta */
+        .skateboard {
+            width: 55px;
+            height: 6px;
+            background: #ff4757;
+            border-radius: 10px;
+            position: absolute;
+            bottom: 0;
+            left: 0;
+        }
+
+        /* Ruedas de la patineta */
+        .skateboard::before, .skateboard::after {
+            content: "";
+            position: absolute;
+            width: 8px;
+            height: 8px;
+            background: #333;
+            border-radius: 50%;
+            bottom: -4px;
+        }
+        .skateboard::before { left: 8px; }
+        .skateboard::after { right: 8px; }
+
+        /* Animación de desplazamiento y balanceo */
+        @keyframes skate-move {
+            0% { 
+                left: -10%; 
+                transform: rotate(5deg) translateY(0); 
+            }
+            25% { transform: rotate(-5deg) translateY(-10px); }
+            50% { transform: rotate(5deg) translateY(0); }
+            75% { transform: rotate(-5deg) translateY(-10px); }
+            100% { 
+                left: 110%; 
+                transform: rotate(5deg) translateY(0); 
+            }
+        }
+
+        /* Ajuste de color en modo oscuro */
+        body.dark-mode .astro-body, 
+        body.dark-mode .astro-head {
+            border-color: #fff;
+        }
+        body.dark-mode .astro-head::after {
+            background: #4facfe; /* Visor brilla en azul en modo oscuro */
         }
     </style>
 </head>
@@ -140,6 +247,15 @@
         <h2>Diseñador Gráfico</h2>
         <p id="mensaje">Bienvenido a mi portafolio digital. Aquí encontrarás una selección de mis trabajos destacados.</p>
         <button class="toggle-btn" onclick="toggleMode()">Cambiar modo</button>
+
+        <div class="skate-container">
+            <div class="astronaut">
+                <div class="astro-pack"></div>
+                <div class="astro-body"></div>
+                <div class="astro-head"></div>
+                <div class="skateboard"></div>
+            </div>
+        </div>
     </header>
 
     <main>
@@ -197,8 +313,11 @@
         ];
         let index = 0;
         setInterval(() => {
-            document.getElementById("mensaje").textContent = mensajes[index];
-            index = (index + 1) % mensajes.length;
+            const msgElement = document.getElementById("mensaje");
+            if(msgElement) {
+                msgElement.textContent = mensajes[index];
+                index = (index + 1) % mensajes.length;
+            }
         }, 4000);
     </script>
 
