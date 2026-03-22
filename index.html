@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <title>Portafolio de Osman Natanael Quintanar Luna</title>
     <style>
-        /* ESTILOS BASE */
+        /* --- ESTILOS BASE --- */
         body {
             background-color: #f5f5f5;
             color: #333;
@@ -22,12 +22,12 @@
             text-align: center;
             padding: 60px 20px;
             position: relative;
-            overflow: hidden; /* Contiene el espacio exterior */
+            overflow: hidden;
         }
 
         header h1, header h2, header p, .toggle-btn {
             position: relative;
-            z-index: 10; /* Por encima de las estrellas */
+            z-index: 10;
         }
 
         header h1 { font-size: 2.5em; margin-bottom: 10px; letter-spacing: 2px; }
@@ -42,11 +42,10 @@
             border-radius: 5px;
             cursor: pointer;
             margin-top: 15px;
+            transition: background 0.3s;
         }
 
-        /* --- ESCENA ESPACIAL ANIMADA --- */
-
-        /* Estrellas */
+        /* --- ESCENA ESPACIAL --- */
         .star {
             position: absolute;
             background: white;
@@ -54,100 +53,77 @@
             opacity: 0.5;
             animation: twinkle var(--duration) infinite;
         }
-
         @keyframes twinkle {
             0%, 100% { opacity: 0.3; transform: scale(1); }
             50% { opacity: 1; transform: scale(1.2); }
         }
 
-        /* Planeta */
-        .planet {
-            position: absolute;
-            border-radius: 50%;
-            border: 2px solid rgba(255,255,255,0.1);
-        }
-        .planet-1 { width: 40px; height: 40px; background: #4facfe; top: 20%; left: 10%; box-shadow: inset -5px -5px 10px rgba(0,0,0,0.5); }
-        .planet-2 { width: 25px; height: 25px; background: #ff6b6b; bottom: 15%; right: 15%; box-shadow: inset -3px -3px 8px rgba(0,0,0,0.5); }
+        .planet { position: absolute; border-radius: 50%; z-index: 1; }
+        .planet-1 { width: 45px; height: 45px; background: radial-gradient(circle at 30% 30%, #4facfe, #001242); top: 15%; left: 8%; }
+        .planet-2 { width: 30px; height: 30px; background: radial-gradient(circle at 30% 30%, #ff6b6b, #6b0000); bottom: 20%; right: 10%; }
 
-        /* El Alien y su OVNI */
         .ufo {
             position: absolute;
-            width: 40px;
-            height: 25px;
+            width: 45px;
+            height: 30px;
             left: -150px;
-            top: 30%;
-            animation: ufo-move 15s linear infinite;
+            top: 25%;
+            animation: ufo-move 14s linear infinite;
             z-index: 5;
         }
-        .ufo-body {
-            width: 40px;
-            height: 15px;
-            background: #95afc0;
-            border-radius: 50%;
-            position: absolute;
-            bottom: 0;
-            border: 1px solid #333;
-        }
-        .ufo-glass {
-            width: 20px;
-            height: 15px;
-            background: rgba(129, 236, 236, 0.7);
-            border-radius: 50% 50% 0 0;
-            position: absolute;
-            top: 0;
-            left: 10px;
-            border: 1px solid #333;
-        }
-        /* El pequeño alien dentro */
-        .ufo-glass::after {
-            content: "👽";
-            font-size: 10px;
-            position: absolute;
-            top: 2px;
-            left: 3px;
-        }
+        .ufo-body { width: 45px; height: 18px; background: #95afc0; border-radius: 50%; position: absolute; bottom: 0; border: 1px solid #333; }
+        .ufo-glass { width: 22px; height: 16px; background: rgba(129, 236, 236, 0.7); border-radius: 50% 50% 0 0; position: absolute; top: 0; left: 11px; border: 1px solid #333; }
+        .ufo-glass::after { content: "👽"; font-size: 11px; position: absolute; top: 1px; left: 4px; }
 
-        /* El Astronauta (Ajustado) */
-        .skate-container { width: 100%; height: 100px; position: relative; margin-top: 20px; }
+        .skate-container { width: 100%; height: 90px; position: relative; margin-top: 25px; }
         .astronaut {
             position: absolute;
-            width: 40px;
-            height: 60px;
+            width: 45px;
+            height: 65px;
             left: -100px;
-            bottom: 10px;
-            animation: skate-move 12s linear infinite;
+            bottom: 5px;
+            animation: skate-move 10s linear infinite;
             z-index: 6;
         }
-        .astro-body { width: 25px; height: 35px; background: #eee; border: 2px solid #333; border-radius: 8px; position: absolute; top: 20px; left: 8px; }
-        .astro-head { width: 22px; height: 20px; background: #fff; border: 2px solid #333; border-radius: 50%; position: absolute; top: 2px; left: 9px; }
-        .astro-head::after { content: ""; position: absolute; width: 14px; height: 8px; background: #333; border-radius: 4px; top: 5px; left: 4px; }
-        .skateboard { width: 45px; height: 6px; background: #ff4757; border-radius: 10px; position: absolute; bottom: 0; left: 0; }
+        .astro-body { width: 28px; height: 38px; background: #eee; border: 2px solid #333; border-radius: 8px; position: absolute; top: 20px; left: 8px; }
+        .astro-head { width: 24px; height: 22px; background: #fff; border: 2px solid #333; border-radius: 50%; position: absolute; top: 2px; left: 10px; }
+        .astro-head::after { content: ""; position: absolute; width: 16px; height: 9px; background: #333; border-radius: 4px; top: 5px; left: 4px; }
+        .skateboard { width: 50px; height: 7px; background: #ff4757; border-radius: 10px; position: absolute; bottom: 0; left: 0; }
 
-        /* ANIMACIONES */
-        @keyframes skate-move {
-            0% { left: -10%; transform: rotate(5deg); }
-            100% { left: 110%; transform: rotate(5deg); }
-        }
+        @keyframes skate-move { 0% { left: -10%; transform: rotate(5deg); } 100% { left: 110%; transform: rotate(5deg); } }
+        @keyframes ufo-move { 0% { left: -20%; transform: translateY(0); } 50% { transform: translateY(-30px); } 100% { left: 120%; transform: translateY(0); } }
 
-        @keyframes ufo-move {
-            0% { left: -20%; transform: translateY(0); }
-            25% { transform: translateY(-20px); }
-            50% { transform: translateY(10px); }
-            75% { transform: translateY(-15px); }
-            100% { left: 120%; transform: translateY(0); }
-        }
-
-        /* MODO OSCURO */
-        body.dark-mode { background-color: #1c1c1c; color: #e0e0e0; }
-        body.dark-mode header { background-color: #0b0b1a; }
-        body.dark-mode .astro-head::after { background: #00d2ff; }
-
-        /* CONTENIDO PRINCIPAL */
+        /* --- CONTENIDO PRINCIPAL --- */
         main { max-width: 1000px; margin: 40px auto; padding: 20px; }
-        article { background: white; border-radius: 8px; padding: 20px; margin-bottom: 30px; box-shadow: 0 2px 6px rgba(0,0,0,0.1); opacity: 0; transform: translateY(20px); transition: 0.6s; }
+        section h3 { font-size: 1.8em; border-bottom: 2px solid #999; padding-bottom: 10px; margin-bottom: 30px; color: #444; transition: color 0.3s; }
+        
+        article {
+            background-color: #ffffff;
+            border: 1px solid #ccc;
+            padding: 20px;
+            margin-bottom: 30px;
+            border-radius: 8px;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+            opacity: 0;
+            transform: translateY(20px);
+        }
         article.visible { opacity: 1; transform: translateY(0); }
-        article img { width: 100%; border-radius: 6px; }
-        footer { background: #2f2f2f; color: white; text-align: center; padding: 20px; }
+        article h4 { margin-top: 0; color: #222; transition: color 0.3s; }
+        article p { color: #555; margin-bottom: 15px; transition: color 0.3s; }
+        article img { border-radius: 6px; border: 1px solid #aaa; width: 100%; }
+
+        footer { background-color: #2f2f2f; color: #f5f5f5; text-align: center; padding: 20px; transition: background-color 0.3s; }
+
+        /* --- CORRECCIONES MODO OSCURO --- */
+        body.dark-mode { background-color: #121212; color: #e0e0e0; }
+        body.dark-mode header { background-color: #05050a; }
+        body.dark-mode section h3 { color: #ffffff; border-color: #555; }
+        body.dark-mode article { background-color: #1e1e1e; border-color: #333; box-shadow: 0 4px 10px rgba(0,0,0,0.5); }
+        body.dark-mode article h4 { color: #4facfe; } /* Título del proyecto en azul brillante */
+        body.dark-mode article p { color: #bbb; } /* Texto descriptivo en gris claro */
+        body.dark-mode footer { background-color: #05050a; }
+        body.dark-mode .astro-head::after { background: #00d2ff; } /* Visor brilla */
     </style>
 </head>
 <body>
@@ -163,7 +139,7 @@
 
         <h1>Osman Natanael Quintanar Luna</h1>
         <h2>Diseñador Gráfico</h2>
-        <p id="mensaje">Explora mi universo creativo.</p>
+        <p id="mensaje">Bienvenido a mi portafolio digital. Aquí encontrarás una selección de mis trabajos destacados.</p>
         <button class="toggle-btn" onclick="toggleMode()">Cambiar modo</button>
 
         <div class="skate-container">
@@ -183,25 +159,34 @@
                 <p>Diseño de logotipo 1 y branding para una empresa emergente.</p>
                 <img src="LOGO 1.png" alt="Identidad Visual">
             </article>
+
             <article>
                 <h4>Proyecto 2: Identidad Visual</h4>
                 <p>Diseño de logotipo 2 y branding para una empresa emergente.</p>
                 <img src="LOGO 2.png" alt="Identidad Visual">
             </article>
+
+            <article>
+                <h4>Proyecto 3: Identidad Visual</h4>
+                <p>Diseño de logotipo 3 y branding para una empresa emergente.</p>
+                <img src="LOGO 3.png" alt="Identidad Visual">
+            </article>
         </section>
     </main>
 
     <footer>
-        <p>© 2026 Osman Natanael Quintanar Luna | @a_p_o_l_i_o_n</p>
+        <p>© 2026 Osman Natanael Quintanar Luna - Todos los derechos reservados</p>
+        <p>Contacto: osmanluna117@outlook.com</p>
+        <p>Sígueme en redes sociales: @ a_p_o_l_i_o_n</p>
     </footer>
 
     <script>
-        // Generar estrellas aleatorias
+        // Generar 60 estrellas aleatorias
         const header = document.getElementById('space-header');
-        for (let i = 0; i < 50; i++) {
+        for (let i = 0; i < 60; i++) {
             const star = document.createElement('div');
             star.className = 'star';
-            const size = Math.random() * 3 + 'px';
+            const size = Math.random() * 2 + 1 + 'px';
             star.style.width = size;
             star.style.height = size;
             star.style.top = Math.random() * 100 + '%';
@@ -210,19 +195,40 @@
             header.appendChild(star);
         }
 
-        // Modo oscuro
+        // Alternar modo oscuro/claro
         function toggleMode() {
             document.body.classList.toggle("dark-mode");
         }
 
-        // Animación de scroll
-        window.addEventListener("scroll", () => {
-            document.querySelectorAll("article").forEach(art => {
-                if (art.getBoundingClientRect().top < window.innerHeight - 100) {
-                    art.classList.add("visible");
+        // Animación de entrada de artículos al hacer scroll
+        function checkScroll() {
+            const articles = document.querySelectorAll("article");
+            articles.forEach(article => {
+                const position = article.getBoundingClientRect().top;
+                if (position < window.innerHeight - 100) {
+                    article.classList.add("visible");
                 }
             });
-        });
+        }
+        window.addEventListener("scroll", checkScroll);
+        window.addEventListener("load", checkScroll); // Ejecutar al cargar
+
+        // Mensajes dinámicos
+        const mensajes = [
+            "Bienvenido a mi portafolio digital.",
+            "El diseño es mi pasión.",
+            "Cada línea y figura cuenta una historia.",
+            "Explora mi universo creativo."
+        ];
+        let index = 0;
+        setInterval(() => {
+            const msgElement = document.getElementById("mensaje");
+            if(msgElement) {
+                msgElement.textContent = mensajes[index];
+                index = (index + 1) % mensajes.length;
+            }
+        }, 4000);
     </script>
+
 </body>
 </html>
